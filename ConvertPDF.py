@@ -9,9 +9,9 @@ start_time = time()
 tool = pyocr.get_available_tools()[0]
 lang = tool.get_available_languages()[0]
 
-results_file = [['DocumentName', 'WordsFound', 'Text']] #
+results_file = [['DocumentName', 'WordsFound']] #, 'Text'
 file_list = []
-search_words = ['adult', 'alcoh', 'alcohol', 'apparel', 'beer', 'campaign', 'candidat', 'cantina', 'capital', 'casino', 'celebra', 'chair', 'church', 'cigar', 'clinic', 'cloth', 'club', 'college', 'comput', 'contribu', 'court', 'credit', 'danc', 'dentist', 'dinero', 'dinner', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'favor', 'festiv', 'fiest', 'fine', 'flower', 'gambl', 'game', 'gaming', 'gift', 'govern', 'home', 'hospit', 'hotel', 'hotline', 'hous', 'jail', 'jewel', 'lawyer', 'liqu', 'liquor', 'lunch', 'luxur', 'membership', 'monitor', 'museum', 'music', 'party', 'poker', 'polic', 'politic', 'recreation', 'recruit', 'representa', 'restaur', 'reward', 'school', 'server', 'social', 'sport', 'taver', 'tele', 'theater', 'theatre', 'university', 'vacati', 'visa', 'welfare', 'wine']
+search_words = ['adult', 'alcoh', 'alcohol', 'apparel', 'beer', 'campaign', 'candidat', 'cantina', 'capital', 'casino', 'celebra', 'chair', 'church', 'cigar', 'clinic', 'cloth', 'club', 'college', 'comput', 'contribu', 'court', 'credit', 'danc', 'dentist', 'dinero', 'dinner', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'favor', 'festiv', 'fiest', 'fine', 'flower', 'gambl', 'game', 'gaming', 'gift', 'govern', 'home', 'hospit', 'hotel', 'hotline', 'hous', 'jail', 'jewel', 'lawyer', 'liqu', 'liquor', 'lunch', 'luxur', 'membership', 'monitor', 'music', 'party', 'poker', 'polic', 'politic', 'recreation', 'recruit', 'representa', 'restaur', 'reward', 'school', 'server', 'social', 'sport', 'taver', 'tele', 'theater', 'theatre', 'university', 'vacati', 'visa', 'welfare', 'wine']
 count = 0
 
 path = os.getcwd()
@@ -60,15 +60,17 @@ for the_file in file_list:
     pageObj = pdfReader.getPage(i)
     final_text.append(pageObj.extractText())
 
-  all_text = re.sub(r'\W+', '', " ".join(final_text)).lower()
+  # all_text = re.sub(r'\W+', '', " ".join(final_text)).lower()
+
+  all_text = re.sub(r'([^\s\w]|_)+', '', " ".join(final_text)).lower()
 
   for word in search_words:
     if word in all_text:
       found_words.append(word)
   if len(found_words) > 0:
-    results_file.append([the_file, " ".join(found_words), all_text])#
+    results_file.append([the_file, " ".join(found_words)])#, all_text
   else:
-    results_file.append([the_file, "Nothing was found", all_text])#
+    results_file.append([the_file, "Nothing was found"])#, all_text
   print "File read:",round(time()-t0,3),"s"
   print "Total script time elapsed:",round((time()-start_time)/60,2),"m\n"
 ocr_output = 'OCROutput' + str(time()) + '.csv'
@@ -79,6 +81,8 @@ with open(ocr_output, 'wb') as csv_file:
 os.system("sublime " + ocr_output)
 
 print "Script End:",round((time()-start_time)/60,2),"m"
+
+os.system('say "scanning is complete"')
 
 ################################ ALL PREVIOUS CODE #################################
 #   t0 = time()
