@@ -5,6 +5,8 @@ import pyocr, io, re, os, fnmatch, csv
 import pyocr.builders
 import pypdfocr
 import PyPDF2
+from sys import platform
+
 start_time = time()
 tool = pyocr.get_available_tools()[0]
 lang = tool.get_available_languages()[0]
@@ -82,8 +84,13 @@ os.system("sublime " + ocr_output)
 
 print "Script End:",round((time()-start_time)/60,2),"m"
 
-os.system('say "scanning is complete"')
-
+if platform == "darwin":
+  os.system('say "scanning is complete"')
+else:
+  import subprocess
+  subprocess.call(['speech-dispatcher'])        #start speech dispatcher
+  subprocess.call(['spd-say', '"your process has finished"'])
+  
 ################################ ALL PREVIOUS CODE #################################
 #   t0 = time()
 #   print "Images loaded:",round(time()-t0,3),"s"
