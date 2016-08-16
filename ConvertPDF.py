@@ -1,6 +1,6 @@
 from time import time
 # from wand.image import Image
-from PIL import Image as PI
+# from PIL import Image as PI
 import pyocr, io, re, os, fnmatch, csv
 import pyocr.builders
 import pypdfocr
