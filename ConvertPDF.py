@@ -80,7 +80,7 @@ with open(ocr_output, 'wb') as csv_file:
   wr = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
   for i in results_file:
     wr.writerow(i)
-os.system("sublime " + ocr_output)
+# os.system("sublime " + ocr_output)
 
 print "Script End:",round((time()-start_time)/60,2),"m"
 
