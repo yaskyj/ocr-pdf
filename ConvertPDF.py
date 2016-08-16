@@ -13,7 +13,7 @@ lang = tool.get_available_languages()[0]
 
 results_file = [['DocumentName', 'WordsFound']] #, 'Text'
 file_list = []
-search_words = ['adult', 'alcoh', 'alcohol', 'apparel', 'beer', 'campaign', 'candidat', 'cantina', 'capital', 'casino', 'celebra', 'chair', 'church', 'cigar', 'clinic', 'cloth', 'club', 'college', 'comput', 'contribu', 'court', 'credit', 'danc', 'dentist', 'dinero', 'dinner', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'favor', 'festiv', 'fiest', 'fine', 'flower', 'gambl', 'game', 'gaming', 'gift', 'govern', 'home', 'hospit', 'hotel', 'hotline', 'hous', 'jail', 'jewel', 'lawyer', 'liqu', 'liquor', 'lunch', 'luxur', 'membership', 'monitor', 'music', 'party', 'poker', 'polic', 'politic', 'recreation', 'recruit', 'representa', 'restaur', 'reward', 'school', 'server', 'social', 'sport', 'taver', 'tele', 'theater', 'theatre', 'university', 'vacati', 'visa', 'welfare', 'wine']
+search_words = ['adult', 'alcohol', 'apparel', 'beer', 'campaign', 'candidate', 'cantina', 'casino', 'celebration', 'chair', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'credit', 'dance', 'dentist', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'game', 'gaming', 'gift', 'hospital', 'hotline', 'jail', 'jewel', 'lawyer', 'liquor', 'luxury', 'membership', 'monitor', 'music', 'party', 'poker', 'recreation', 'recruit', 'reward', 'school', 'server', 'social', 'sport', 'tavern', 'tele', 'university', 'vacation', 'visa', 'welfare', 'wine']
 count = 0
 
 path = os.getcwd()
