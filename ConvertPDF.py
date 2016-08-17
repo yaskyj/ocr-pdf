@@ -82,6 +82,23 @@ with open(ocr_output, 'wb') as csv_file:
     wr.writerow(i)
 # os.system("sublime " + ocr_output)
 
+match_string = '*_ocr*'
+# not_match = '*' + image + '_ocr*'
+for file in os.listdir('.'):
+    if fnmatch.fnmatch(file, match_string):
+      destination = './PDFs-Searched/' + file
+      # current_name = '/Users/arkham/Documents/PythonScripts/ocr-pdf/PDFs-Input/LaborOnly/' + file 
+      os.rename(file, destination)
+      print file
+      print destination
+
+match_string = '*.pdf'
+for file in os.listdir('.'):
+    if fnmatch.fnmatch(file, match_string):
+      # current_name = '/Users/arkham/Documents/PythonScripts/ocr-pdf/PDFs-Input/LaborOnly/' + file 
+      os.remove(file)
+      print file
+
 print "Script End:",round((time()-start_time)/60,2),"m"
 
 if platform == "darwin":
