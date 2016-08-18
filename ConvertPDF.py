@@ -11,7 +11,7 @@ lang = tool.get_available_languages()[0]
 
 results_file = [['DocumentName', 'WordsFound']]
 file_list = []
-search_words = ['adult', 'alcohol', 'apparel', 'beer', 'campaign', 'candidate', 'casino', 'celebration', 'chair', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dance', 'dentist', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'game', 'gaming', 'gift', 'hospital', 'hotline', 'jail', 'jewel', 'lawyer', 'liquor', 'luxury', 'membership', 'monitor', 'music', 'party', 'poker', 'recreation', 'recruit', 'reward', 'school', 'server', 'television', 'university', 'vacation', 'visa', 'welfare', 'wine']
+search_words = ['adult', 'alcohol', 'apparel', 'bail', 'campaign', 'candidate', 'casino', 'camp', 'chair', 'charter', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dentist', 'deposit', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'gaming', 'gift', 'hospital', 'hunt', 'jail', 'jewel', 'lawyer', 'monitor', 'poker', 'recruit', 'school', 'software', 'student', 'television', 'university', 'vacation']
 count = 0
 
 path = os.getcwd()
