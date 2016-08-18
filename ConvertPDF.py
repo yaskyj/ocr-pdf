@@ -1,6 +1,4 @@
 from time import time
-# from wand.image import Image
-# from PIL import Image as PI
 import pyocr, io, re, os, fnmatch, csv
 import pyocr.builders
 import pypdfocr
@@ -11,9 +9,9 @@ start_time = time()
 tool = pyocr.get_available_tools()[0]
 lang = tool.get_available_languages()[0]
 
-results_file = [['DocumentName', 'WordsFound']] #, 'Text'
+results_file = [['DocumentName', 'WordsFound']]
 file_list = []
-search_words = ['adult', 'alcohol', 'apparel', 'bail', 'campaign', 'candidate', 'casino', 'camp', 'chair', 'charter', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dentist', 'deposit', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'gaming', 'gift', 'hospital', 'hunt', 'jail', 'jewel', 'lawyer', 'monitor', 'poker', 'recruit', 'school', 'software', 'student', 'television', 'university', 'vacation']
+search_words = ['adult', 'alcohol', 'apparel', 'beer', 'campaign', 'candidate', 'casino', 'celebration', 'chair', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dance', 'dentist', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'game', 'gaming', 'gift', 'hospital', 'hotline', 'jail', 'jewel', 'lawyer', 'liquor', 'luxury', 'membership', 'monitor', 'music', 'party', 'poker', 'recreation', 'recruit', 'reward', 'school', 'server', 'television', 'university', 'vacation', 'visa', 'welfare', 'wine']
 count = 0
 
 path = os.getcwd()
@@ -62,17 +60,15 @@ for the_file in file_list:
     pageObj = pdfReader.getPage(i)
     final_text.append(pageObj.extractText())
 
-  # all_text = re.sub(r'\W+', '', " ".join(final_text)).lower()
-
   all_text = re.sub(r'([^\s\w]|_)+', '', " ".join(final_text)).lower()
 
   for word in search_words:
     if word in all_text:
       found_words.append(word)
   if len(found_words) > 0:
-    results_file.append([the_file, " ".join(found_words)])#, all_text
+    results_file.append([the_file, " ".join(found_words)])
   else:
-    results_file.append([the_file, "Nothing was found"])#, all_text
+    results_file.append([the_file, "Nothing was found"])
   print "File read:",round(time()-t0,3),"s"
   print "Total script time elapsed:",round((time()-start_time)/60,2),"m\n"
 ocr_output = 'OCROutput' + str(time()) + '.csv'
@@ -80,14 +76,11 @@ with open(ocr_output, 'wb') as csv_file:
   wr = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
   for i in results_file:
     wr.writerow(i)
-# os.system("sublime " + ocr_output)
 
 match_string = '*_ocr*'
-# not_match = '*' + image + '_ocr*'
 for file in os.listdir('.'):
     if fnmatch.fnmatch(file, match_string):
       destination = './PDFs-Searched/' + file
-      # current_name = '/Users/arkham/Documents/PythonScripts/ocr-pdf/PDFs-Input/LaborOnly/' + file 
       os.rename(file, destination)
       print file
       print destination
@@ -95,7 +88,6 @@ for file in os.listdir('.'):
 match_string = '*.pdf'
 for file in os.listdir('.'):
     if fnmatch.fnmatch(file, match_string):
-      # current_name = '/Users/arkham/Documents/PythonScripts/ocr-pdf/PDFs-Input/LaborOnly/' + file 
       os.remove(file)
       print file
 
@@ -107,64 +99,3 @@ else:
   import subprocess
   subprocess.call(['speech-dispatcher'])        #start speech dispatcher
   subprocess.call(['spd-say', '"your process has finished"'])
-  
-################################ ALL PREVIOUS CODE #################################
-#   t0 = time()
-#   print "Images loaded:",round(time()-t0,3),"s"
-#   req_image = []
-#   final_text = []
-#   found_words = []
-#   all_text = ''
-
-#   print the_file
-#   count += 1
-#   print count
-
-#   t0 = time()
-#   print "Load images"
-#   image_pdf = Image(filename="./" + the_file, resolution=300)
-#   image_jpeg = image_pdf.convert('jpeg')
-#   print "Images loaded:",round(time()-t0,3),"s"
-
-#   t0 = time()
-#   print "Creating blobs"
-#   for img in image_jpeg.sequence:
-#     img_page = Image(image=img)
-#     req_image.append(img_page.make_blob('jpeg'))
-#   print "Blobs created:",round(time()-t0,3),"s"
-
-#   t0 = time()
-#   print "Using Tessaract"
-#   for img in req_image: 
-#     txt = tool.image_to_string(
-#       PI.open(io.BytesIO(img)),
-#       lang=lang,
-#       builder=pyocr.builders.TextBuilder()
-#     )
-#     final_text.append(txt)
-#   print "Tessaract projected:",round(time()-t0,3),"s"
-
-#   # text_file = open("Output.txt", "w")
-#   # re.sub(r'\W+', '', " ".join(final_text))
-
-#   # text_file.write(re.sub(r'([^\s\w]|_)+', '', " ".join(final_text)).lower())
-#   # text_file.write(re.sub(r'\W+', '', " ".join(final_text)).lower())
-#   # text_file.close()
-#   all_text = re.sub(r'\W+', '', " ".join(final_text)).lower()
-
-#   for word in search_words:
-#     if word in all_text:
-#       found_words.append(word)
-#   if len(found_words) > 0:
-#     results_file.append([the_file, " ".join(found_words), all_text])#
-#   else:
-#     results_file.append([the_file, "Nothing was found", all_text])#
-#   print "Total script time elapsed:",round((time()-start_time)/60,2),"m\n"
-# # os.system("sublime Output.txt")
-# # print " ".join(final_text)
-# ocr_output = 'OCROutput' + str(time()) + '.csv'
-# with open(ocr_output, 'wb') as csv_file:
-#   wr = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-#   for i in results_file:
-#     wr.writerow(i)
-# os.system("sublime " + ocr_output)
