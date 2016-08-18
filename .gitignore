@@ -7,7 +7,7 @@
 *.zip
 
 #Mac files
-.DS_Store
+*.DS_Store
 
 #Windows files
 Thumbs.db
