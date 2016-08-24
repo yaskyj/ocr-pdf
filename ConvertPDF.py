@@ -96,6 +96,9 @@ print "Script End:",round((time()-start_time)/60,2),"m"
 if platform == "darwin":
   os.system('say "scanning is complete"')
 else:
-  import subprocess
-  subprocess.call(['speech-dispatcher'])        #start speech dispatcher
-  subprocess.call(['spd-say', '"your process has finished"'])
+  try:
+    import subprocess
+    subprocess.call(['speech-dispatcher'])        #start speech dispatcher
+    subprocess.call(['spd-say', '"your process has finished"'])
+  except Exception, e:
+    print e
