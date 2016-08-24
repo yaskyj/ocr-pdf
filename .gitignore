@@ -9,6 +9,9 @@
 #Mac files
 *.DS_Store
 
+#Key files
+*.pem
+
 #Windows files
 Thumbs.db
 
