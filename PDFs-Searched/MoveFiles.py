@@ -25,7 +25,7 @@ import os, fnmatch, csv, re
 match_string = '*.pdf'
 for file in os.listdir('.'):
     if fnmatch.fnmatch(file, match_string):
-      destination = './Transmission-Part3/' + file
-      # os.rename(file, destination)
+      destination = './PDFs-Input/' + file
+      os.rename(file, destination)
       print file
       print destination
