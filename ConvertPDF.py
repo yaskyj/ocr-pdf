@@ -12,8 +12,9 @@ lang = tool.get_available_languages()[0]
 results_file = [['DocumentName', 'WordsFound']]
 file_list = []
 # search_words = ['adult', 'alcohol', 'apparel', 'bail', 'campaign', 'candidate', 'casino', 'camp', 'chair', 'charter', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dentist', 'deposit', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'gaming', 'gift', 'hospital', 'hunt', 'jail', 'jewel', 'lawyer', 'monitor', 'poker', 'recruit', 'school', 'software', 'student', 'television', 'university', 'vacation']
-# search_words = [' rent ', ' lease ']
-search_words = ['carnegie']
+
+search_words = ['generic', 'generic document','fuel characterization', 'fuel sipping', 'ultrasonic testing', 'fuel video inspections', 'fuel selection', 'dry fuel', 'spent fuel', 'storage pad', 'isfsi', 'independent spent fuel storage installation', 'fuel storage', 'dfs']
+
 count = 0
 
 path = os.getcwd()
@@ -62,7 +63,13 @@ for the_file in file_list:
     pageObj = pdfReader.getPage(i)
     final_text.append(pageObj.extractText())
 
-  all_text = re.sub(r'([^\s\w]|_)+', '', " ".join(final_text)).lower()
+  all_text = re.sub(r'([^\s\w]|_)+', ' ', " ".join(final_text)).lower()
+  all_text = all_text.replace('\n', ' ').replace('\r', ' ')
+  all_text = ' '.join(all_text.split())
+  print all_text
+  # f = open('all_text.txt', 'w')
+  # f.write(all_text)
+  # f.close()
 
   for word in search_words:
     if word in all_text:
