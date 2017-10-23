@@ -22,10 +22,12 @@ import os, fnmatch, csv, re
 #     count = 1
 #   else:
 #     count += 1
-match_string = '*.pdf'
+match_string = '*_ocr.pdf'
 for file in os.listdir('.'):
-    if fnmatch.fnmatch(file, match_string):
-      destination = './Transmission-Part3/' + file
-      # os.rename(file, destination)
-      print file
-      print destination
+	if fnmatch.fnmatch(file, match_string):
+		# destination = './Transmission-Part3/' + file
+		os.rename(file, re.search('(.+)_ocr.pdf', file).group(1) + '.pdf')
+		# print file
+		# print re.search('(.+)_ocr.pdf', file).group(1) + '.pdf'
+		# print fnmatch.fnmatch(file, '(*)_ocr.pdf')
+		# print destination

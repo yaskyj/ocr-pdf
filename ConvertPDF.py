@@ -13,7 +13,9 @@ results_file = [['DocumentName', 'WordsFound']]
 file_list = []
 # search_words = ['adult', 'alcohol', 'apparel', 'bail', 'campaign', 'candidate', 'casino', 'camp', 'chair', 'charter', 'church', 'cigar', 'clinic', 'club', 'college', 'computer', 'court', 'dentist', 'deposit', 'dinero', 'doctor', 'donation', 'entertain', 'escort', 'exotic', 'flower', 'gamble', 'gambling', 'gaming', 'gift', 'hospital', 'hunt', 'jail', 'jewel', 'lawyer', 'monitor', 'poker', 'recruit', 'school', 'software', 'student', 'television', 'university', 'vacation']
 
-search_words = ['generic', 'generic document','fuel characterization', 'fuel sipping', 'ultrasonic testing', 'fuel video inspections', 'fuel selection', 'dry fuel', 'spent fuel', 'storage pad', 'isfsi', 'independent spent fuel storage installation', 'fuel storage', 'dfs']
+# search_words = ['fuel characterization', 'fuel sipping', 'ultrasonic testing', 'fuel video inspections', 'fuel selection', 'dry fuel', 'spent fuel', 'storage pad', 'isfsi', 'independent spent fuel storage installation', 'fuel storage', 'dfs']
+
+search_words = [' rent ', 'rent', ' lease ', 'lease']
 
 count = 0
 
@@ -66,7 +68,7 @@ for the_file in file_list:
   all_text = re.sub(r'([^\s\w]|_)+', ' ', " ".join(final_text)).lower()
   all_text = all_text.replace('\n', ' ').replace('\r', ' ')
   all_text = ' '.join(all_text.split())
-  print all_text
+  # print all_text
   # f = open('all_text.txt', 'w')
   # f.write(all_text)
   # f.close()
